@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -36,13 +37,29 @@ public class Test {
 				System.out.println(emp.getEno()+" \t "+emp.getEname()+" \t "+ emp.getEsal()+ " \t "+emp.getEaddr());
 			}
 			*/
-			Iterator<Employee> itr = query.iterate();
+			/*Iterator<Employee> itr = query.iterate();
 			System.out.println("Using iterate() method");
 			System.out.println("ENO\tENAME\tESAL\tEADDR");
 			System.out.println("-------------------------------------------");
 			while(itr.hasNext()) {
 				Employee emp = itr.next();
 				System.out.println(emp.getEno()+" \t "+emp.getEname()+" \t "+ emp.getEsal()+ " \t "+emp.getEaddr());
+			}*/
+			
+			ScrollableResults results = query.scroll();
+			System.out.println("Using scroll() method");
+			System.out.println("Employee Details in Forward Direction");
+			System.out.println("ENO\tENAME\tESAL\tEADDR");
+			System.out.println("-------------------------------------------");
+			while(results.next()) {
+				Object[] obj = results.get();
+				for(Object o : obj) {
+					Employee emp = (Employee)o;
+					System.out.print(emp.getEno()+"\t");
+					System.out.print(emp.getEname()+"\t");
+					System.out.print(emp.getEsal()+"\t");
+					System.out.println(emp.getEaddr());
+				}
 			}
 			
 		}catch (Exception e) {
