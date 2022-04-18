@@ -1,5 +1,6 @@
 package myproject.hql.test;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -27,14 +28,22 @@ public class Test {
 			session = sessionFactory.openSession();
 			
 			Query query = session.createQuery("from Employee");
-			List<Employee> emps = query.list();
+			/*List<Employee> emps = query.list();
 			System.out.println("Using list() method");
 			System.out.println("ENO\tENAME\tESAL\tEADDR");
 			System.out.println("-------------------------------------------");
 			for(Employee emp : emps) {
 				System.out.println(emp.getEno()+" \t "+emp.getEname()+" \t "+ emp.getEsal()+ " \t "+emp.getEaddr());
 			}
-			
+			*/
+			Iterator<Employee> itr = query.iterate();
+			System.out.println("Using iterate() method");
+			System.out.println("ENO\tENAME\tESAL\tEADDR");
+			System.out.println("-------------------------------------------");
+			while(itr.hasNext()) {
+				Employee emp = itr.next();
+				System.out.println(emp.getEno()+" \t "+emp.getEname()+" \t "+ emp.getEsal()+ " \t "+emp.getEaddr());
+			}
 			
 		}catch (Exception e) {
 			e.printStackTrace();
