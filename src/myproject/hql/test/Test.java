@@ -62,6 +62,20 @@ public class Test {
 				}
 			}
 			
+			System.out.println("Using scroll() method");
+			System.out.println("Employee Details in Backward Direction");
+			System.out.println("ENO\tENAME\tESAL\tEADDR");
+			System.out.println("-------------------------------------------");
+			while(results.previous()) {
+				Object[] obj = results.get();
+				for(Object o : obj) {
+					Employee emp = (Employee)o;
+					System.out.print(emp.getEno()+"\t");
+					System.out.print(emp.getEname()+"\t");
+					System.out.print(emp.getEsal()+"\t");
+					System.out.println(emp.getEaddr());
+				}
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
