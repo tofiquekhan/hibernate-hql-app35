@@ -45,7 +45,7 @@ public class Test {
 				Employee emp = itr.next();
 				System.out.println(emp.getEno()+" \t "+emp.getEname()+" \t "+ emp.getEsal()+ " \t "+emp.getEaddr());
 			}*/
-			
+			/*
 			ScrollableResults results = query.scroll();
 			System.out.println("Using scroll() method");
 			System.out.println("Employee Details in Forward Direction");
@@ -75,7 +75,17 @@ public class Test {
 					System.out.print(emp.getEsal()+"\t");
 					System.out.println(emp.getEaddr());
 				}
-			}
+			}*/
+			System.out.println("Using uniqueResult() method");
+			System.out.println("Employee Details");
+			System.out.println("ENO\tENAME\tESAL\tEADDR");
+			System.out.println("-------------------------------------------");
+			Employee emp = (Employee)query.uniqueResult();
+			System.out.print(emp.getEno()+"\t");
+			System.out.print(emp.getEname()+"\t");
+			System.out.print(emp.getEsal()+"\t");
+			System.out.println(emp.getEaddr());
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
